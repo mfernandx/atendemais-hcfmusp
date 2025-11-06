@@ -1,5 +1,7 @@
 import { useState } from "react"
 import personagemchatbot from '/personagemchatbot.png'
+import Rodape from "../../components/Rodape";
+import Navegador from "../../components/Navegador";
 
 
 type ExibePerguntas = {
@@ -61,8 +63,10 @@ export default function Faq(){
 
     return(
         <>
+
+        <Navegador/>
   
-        <header className="h-35 bg-gradient-to-r from-[#049fce] via-[#39b7dd] to-[#95e4f8] flex justify-center text-7xl p-6">
+        <header className="h-35 bg-linear-to-r from-[#049fce] via-[#39b7dd] to-[#95e4f8] flex justify-center text-7xl p-6">
             <h1 className="font-bold"> PERGUNTAS FREQUENTES </h1>
         </header>
 
@@ -74,7 +78,7 @@ export default function Faq(){
                     <h2 className="text-6xl font-semibold w-[800] text-justify"> Tire suas dúvidas sobre a<br></br> plataforma ATENDE+HC<br></br> na saúde digital. </h2>
                 </section>
 
-                <section className=" w-[700] flex justify-center mt-[25px] ml-[20px]">
+                <section className=" w-[700] flex justify-center mt-[25px] ml-5">
                     <h4 className="text-2xl w-[700px] text-justify font-light"> Bem-vindo à nossa central de ajuda! Aqui você encontra respostas para as dúvidas
             mais comuns sobre nosso projeto e suas funcionalidades.
             Caso não encontre o que está procurando, entre em contato com a nossa equipe.</h4>
@@ -88,7 +92,7 @@ export default function Faq(){
 
         </section>
 
-        <section className='h-[20px] bg-[#0077C8]'></section>
+        <section className='h-5 bg-[#0077C8]'></section>
 
         <section className="min-h-screen flex items-start justify-center py-10 ">
             
@@ -109,7 +113,9 @@ export default function Faq(){
                 </section>
             </section>
         </section>
-        <section className='h-[20px] bg-[#0077C8]'></section>
+        <section className='h-5 bg-[#0077C8]'></section>
+    
+    <Rodape/>
     
     </>
 )

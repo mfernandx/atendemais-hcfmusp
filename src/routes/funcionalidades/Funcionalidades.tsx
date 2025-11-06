@@ -8,12 +8,16 @@ import orientacaoicon from '/orientacaoicon.png'
 import temporealicon from '/temporealicon.png'
 import avaliacaoicon from '/avaliacaoicon.png'
 import autenticacaoicon from '/autenticacaoicon.png'
+import Navegador from '../../components/Navegador'
+import Rodape from '../../components/Rodape'
 
 
 export default function Funcionalidades(){
     return(
         <>
-        <header className="h-35 bg-gradient-to-r from-[#049fce] via-[#39b7dd] to-[#95e4f8] flex justify-center text-7xl p-6">
+        <Navegador/>
+
+        <header className="h-35 bg-linear-to-r from-[#049fce] via-[#39b7dd] to-[#95e4f8] flex justify-center text-7xl p-6">
             <h1 className="font-bold"> FUNCIONALIDADES </h1>
         </header>
 
@@ -25,7 +29,7 @@ export default function Funcionalidades(){
                     <h2 className="text-6xl font-semibold w-[800]  "> Funcionalidades focadas em melhorar sua relação <br></br>com a tecnologia.</h2>
                 </section>
 
-                <section className=" w-[700] flex justify-center mt-[25px] ml-[20px]">
+                <section className=" w-[700] flex justify-center mt-[25px] ml-5">
                     <h4 className="text-2xl w-[700px] text-justify font-light"> A plataforma Atende+HC possui diversas funcionalidades projetadas para 
             fornecer uma melhoria significativa na acessibilidade do usuário, transformando sua experiência em um processo leve e prático. </h4>
                 </section>
@@ -88,7 +92,7 @@ export default function Funcionalidades(){
             </section>
 
 
-            <section className='flex justify-between bg-[#e9eded] p-8 mb-[40px]'>
+            <section className='flex justify-between bg-[#e9eded] p-8 mb-10'>
 
                 <section className='block p-5 w-[400px]'>
                     <img className = 'justify-self-center' src={temporealicon} />
@@ -113,7 +117,9 @@ export default function Funcionalidades(){
 
         </section>
 
-        <section className='h-[20px] bg-[#0077C8]'></section>
+        <section className='h-5 bg-[#0077C8]'></section>
+
+        <Rodape/>
         </>
     )
 }

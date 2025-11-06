@@ -1,3 +1,5 @@
+import Navegador from '../../components/Navegador';
+import Rodape from '../../components/Rodape';
 import personagemchatbot from '/personagemchatbot.png'
 import {useForm} from "react-hook-form";
 
@@ -13,7 +15,9 @@ export default function Contato(){
     
     return(
         <>
-        <header className="h-35 bg-gradient-to-r from-[#049fce] via-[#39b7dd] to-[#95e4f8] flex justify-center text-7xl p-6">
+        <Navegador/>
+
+        <header className="h-35 bg-linear-to-r from-[#049fce] via-[#39b7dd] to-[#95e4f8] flex justify-center text-7xl p-6">
             <h1 className="font-bold"> CONTATO </h1>
         </header>
 
@@ -39,7 +43,7 @@ export default function Contato(){
 
         </section>
 
-        <section className='h-[20px] bg-[#0077C8] '></section>
+        <section className='h-5 bg-[#0077C8] '></section>
 
         <section className='bg-[#e9eded] w-[700px] mt-[50px] justify-self-center p-10 rounded-3xl mb-[50px] '>
 
@@ -48,7 +52,7 @@ export default function Contato(){
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 justify-self-center ">
             
                 <section className=''>
-                <input className="mt-[20px] w-[600px] px-4 py-2 border rounded-3xl focus:ring-2 focus:ring-indigo-500 outline-none border-gray-300 bg-white " id="nome" type="text"{...register("nome", { required: true })}placeholder="Informe seu nome completo:"/>
+                <input className="mt-5 w-[600px] px-4 py-2 border rounded-3xl focus:ring-2 focus:ring-indigo-500 outline-none border-gray-300 bg-white " id="nome" type="text"{...register("nome", { required: true })}placeholder="Informe seu nome completo:"/>
                 </section>
 
             
@@ -67,9 +71,9 @@ export default function Contato(){
     
         </section>
 
-        <section className='h-[20px] bg-[#0077C8]'></section>
+        <section className='h-5 bg-[#0077C8]'></section>
            
-
+        <Rodape/>
         </>
     )
 }

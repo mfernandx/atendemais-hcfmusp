@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom'
 import Funcionalidades from './routes/funcionalidades/Funcionalidades.tsx'
 import Erro from './routes/error/Erro.tsx'
 import Home from './routes/home/Home.tsx'
@@ -11,6 +11,20 @@ import Contato from './routes/contato/Contato.tsx'
 import Faq from './routes/faq/Faq.tsx'
 import Prototipo from './routes/prototipo/Prototipo.tsx'
 import Sobre from './routes/criadores/Sobre.tsx'
+
+import useAuth from './hooks/useAuth.ts'
+import { AuthProvider } from './context/auth.tsx'
+import Login from './routes/login/Login.tsx'
+import Cadastro from './routes/cadastro/Cadastro.tsx'
+
+type PrivateProps = {
+  Item: React.ComponentType
+}
+
+const Private = ({Item}:PrivateProps)=>{
+  const signed = useAuth().signed
+  return signed ? <Item/> : <Navigate to='/login'/>
+}
 
 
 const router = createBrowserRouter([
@@ -21,8 +35,16 @@ const router = createBrowserRouter([
     children:[
       {
         path:"/",
-        element:<Home/>
+        element:<Login/>
       },
+      
+      {
+        path:"/home",
+        element: <Home/>
+      },
+      {path: '/login', element: <Login/>},
+      {path: '/cadastro', element: <Cadastro/>},
+      
       {
         path:"/funcionalidades",
         element:<Funcionalidades/>
@@ -49,6 +71,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>,
 )
