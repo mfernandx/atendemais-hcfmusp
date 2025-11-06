@@ -29,13 +29,13 @@ export default function Cadastro(){
     const handleCadastro = (e: React.FormEvent)=>{
         e.preventDefault()
         if(!nome || !cpf || !dtNascimento || !email || !emailConfirm || !senha || !telefone){
-            setError('Preencha todos os campos.')
+            setError('Todos os campos são obrigatórios.')
             return
         }else if(email !== emailConfirm){
             setError('Os e-mails não são iguais.')
             return
         }
-        const res = cadastro(nome,cpf,dtNascimento,email, senha,telefone)
+        const res = cadastro(nome,cpf,new Date (dtNascimento),email, senha, Number (telefone))
         if(res){
             setError(res)
             return
@@ -81,7 +81,7 @@ export default function Cadastro(){
                     <button className="block m-auto bg-[#0077C8] hover:bg-indigo-600 py-2 px-14 rounded-md text-white font-bold"
                     type="submit">Cadastrar</button>
                     <div className="text-center">
-                        <span className="inline-block mt-4 me-3">Já tem uma conta?</span>
+                        <span className="inline-block mt-4 me-3">Já possui uma conta?</span>
                         <Link className="text-blue-600" to={'/login'}>Ir para o login</Link>
                     </div>
                     

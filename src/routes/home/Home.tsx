@@ -8,8 +8,8 @@ export default function Home(){
     return(
         <>
         <Navegador/>
-        <header className="h-35 bg-linear-to-r from-[#049fce] via-[#39b7dd] to-[#95e4f8] flex justify-center text-7xl p-6">
-            <h1 className="font-bold"> QUEM SOMOS?</h1>
+        <header className="h-35 bg-[url('/hcfmusp-aerea.jpg')] bg-cover bg-center flex justify-center text-7xl text-white p-6">
+            <h1 className="font-bold "> QUEM SOMOS?</h1>
         </header>
 
         <section className='flex'>
@@ -21,9 +21,9 @@ export default function Home(){
                 </section>
 
                 <section className=" w-[700] flex justify-center mt-[25px] ml-5">
-                    <h4 className="text-2xl w-[700px] text-justify font-light"> Atende+HC é uma plataforma criada com o intuito de ajudar pessoas que enfrentam
+                    <h4 className="text-2xl w-[700px] text-justify font-light"> <span className='font-bold text-[#54b3b4] '>ATENDE+HC</span> é uma plataforma criada com o intuito de ajudar pessoas que enfrentam
                         dificuldades no ambiente virtual. Constituído por um website de apoio e um ChatBot
-                        integrado às plataformas Whatsapp e Telegram, o projeto Atende+HC utiliza a empatia para  
+                        integrado às plataformas Whatsapp e Telegram, o projeto <span className='font-bold text-[#54b3b4]'>ATENDE+HC</span> utiliza a empatia para  
                         construir pontes entre o usuário e a tecnologia.</h4>
                 </section>
 
@@ -35,7 +35,7 @@ export default function Home(){
 
         </section>
 
-        <section className='h-5 bg-[#0077C8] mb-5'></section>
+        <section className='h-5 bg-[#14666f] mb-5'></section>
 
         <section className='flex mb-5'>
 
@@ -60,7 +60,7 @@ export default function Home(){
 
         </section>
 
-        <section className='h-5 bg-[#0077C8]'></section>
+        <section className='h-5 bg-[#14666f]'></section>
 
         <section className='flex mb-5'>
 
@@ -85,7 +85,7 @@ export default function Home(){
 
         </section>
 
-        <section className='h-5 bg-[#0077C8]'></section>
+        
 
         <Rodape/>
 

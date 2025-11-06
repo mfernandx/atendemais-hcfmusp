@@ -47,7 +47,7 @@ export default function Login(){
             <div className="w-2/4  mim-h-screen flex flex-col justify-center items-center">
                 <form className="m-auto w-96 p-6 border-2 border-gray-400 rounded-md" onSubmit={handleLogin}>
 
-                    <h1 className="text-5xl text-center text-[#0077C8] font-bold m-6">Login</h1>
+                    <h1 className="text-5xl text-center text-[#0077C8] font-bold m-6">Conecte-se</h1>
                     <input className="w-full p-2 mb-2 border-2 border-gray-400 rounded-md" type="email"
                     placeholder="Digite o seu e-mail:" name="email" value={email} onChange={handleChange} />
                     <input className="w-full p-2 mb-2 border-2 border-gray-400 rounded-md" type="password" 

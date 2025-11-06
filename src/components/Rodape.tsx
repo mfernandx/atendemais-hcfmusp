@@ -1,14 +1,10 @@
-import fiaplogo from '/fiaplogo.svg'
-import hclogo from '/logohcsemfundo.png'
-import iconmais from '/iconmais.png'
+
 
 export default function Rodape(){
     return(
         <>
-        <footer className=" h-[70px] flex justify-center text-xl bg-[#e9eded] ">
-            <img className='h-[40px] justify-self-center mr-[20px] mt-[10px]' src={fiaplogo}/>
-            <img className='h-[40px] mt-[15px]' src={iconmais}/>
-            <img className='h-[60px] ml-[20px] mt-[10px]' src={hclogo}/>
+        <footer className=" h-20 flex justify-center text-xl bg-[url('/hcfmusp-aerea.jpg')] bg-cover bg-center ">
+            <h3 className="m-auto text-white font-bold">© 2024 AtendeMais HCFMUSP - Todos os direitos reservados.</h3>  
         </footer>
         </>
     )

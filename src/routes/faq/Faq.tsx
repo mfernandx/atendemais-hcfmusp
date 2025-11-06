@@ -113,7 +113,7 @@ export default function Faq(){
                 </section>
             </section>
         </section>
-        <section className='h-5 bg-[#0077C8]'></section>
+        
     
     <Rodape/>
     

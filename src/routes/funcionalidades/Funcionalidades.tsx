@@ -30,7 +30,7 @@ export default function Funcionalidades(){
                 </section>
 
                 <section className=" w-[700] flex justify-center mt-[25px] ml-5">
-                    <h4 className="text-2xl w-[700px] text-justify font-light"> A plataforma Atende+HC possui diversas funcionalidades projetadas para 
+                    <h4 className="text-2xl w-[700px] text-justify font-light"> A plataforma <span className='font-bold text-[#54b3b4]'>ATENDE+HC</span> possui diversas funcionalidades projetadas para 
             fornecer uma melhoria significativa na acessibilidade do usuário, transformando sua experiência em um processo leve e prático. </h4>
                 </section>
 
@@ -79,7 +79,7 @@ export default function Funcionalidades(){
                 <section className='block p-5 w-[400px]'>
                     <img className='justify-self-center' src={orientacaoicon}/>
                     <h3 className='text-2xl p-5 justify-self-center font-semibold'>ORIENTAÇÃO</h3>
-                    <p className='text-justify w-[300px] justify-self-center font-extralight text-[20px]'> Auxilia o usuário com suas dúvidas, a partir de uma orientação clara e objetiva sobre como utilizar a plataforma ATENDE+HC.</p>
+                    <p className='text-justify w-[300px] justify-self-center font-extralight text-[20px]'> Auxilia o usuário com suas dúvidas, a partir de uma orientação clara e objetiva sobre como utilizar a plataforma <span className='font-bold text-[#54b3b4]'>ATENDE+HC</span>.</p>
                 </section>
 
                 <section className='block p-5 w-[400px]'>
@@ -117,7 +117,7 @@ export default function Funcionalidades(){
 
         </section>
 
-        <section className='h-5 bg-[#0077C8]'></section>
+        
 
         <Rodape/>
         </>
