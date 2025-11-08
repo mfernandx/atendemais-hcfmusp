@@ -1,12 +1,12 @@
 import {createContext, useEffect, useState} from "react"
 
-type User = { nome: string, cpf: string, dtNascimento: Date, email: string, senha: string, telefone: number }
+type User = { nomePaciente: string, cpf: string, dtNascimento: Date, email: string, senhaAcesso: string, telefone: number }
 
 type AuthContextType = {
     user: User | null,
     signed: boolean,
-    login: (email: string, senha: string) => string | void,
-    cadastro: (nome: string, cpf: string, dtNascimento: Date, email: string, senha: string, telefone: number) => string | void,
+    login: (email: string, senhaAcesso: string) => Promise <string | void>,
+    cadastro: (nomePaciente: string, cpf: string, dtNascimento: Date, email: string, senhaAcesso: string, telefone: number) => Promise<string | void>; 
     logout: ()=> void,
 }
 
@@ -32,35 +32,63 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
         }
     },[])
 
-    const cadastro = (nome: string, cpf: string, dtNascimento: Date, email:string, senha:string, telefone: number): string | void =>{
+    const cadastro = async (
+        nomePaciente: string, 
+        cpf: string, 
+        dtNascimento: Date, 
+        email:string, 
+        senhaAcesso:string, 
+        telefone: number): Promise < string | void> =>{
 
-        const usersStorage = JSON.parse(localStorage.getItem('users_db') || '[]') as User[]
+            try {
+                const response = await fetch("http://localhost:8080/pacientes", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                    nomePaciente,
+                    cpf,
+                    dtNascimento: dtNascimento.toISOString().split("T")[0],
+                    email,
+                    senhaAcesso,
+                    telefone,
+                    }),
+                });
 
-        const hasUser = usersStorage.find((user)=> user.email === email)
+                const data = await response.json();
 
-        if(hasUser){
-            return 'Já existe uma conta com esse email.'
-        }
+                if (response.ok) {
+                    alert(data.mensagem);
+                }else{
+                    alert(data.erro || "Erro ao criar conta.");
+                }
+            } catch (error) {
+            console.error(error);
+            return "Erro de comunicação com o servidor.";
+            }
 
-        const newUser = [...usersStorage, {nome, cpf, dtNascimento, email, senha, telefone}]
-        localStorage.setItem('users_db', JSON.stringify(newUser))
     }
 
-    const login = (email:string, senha:string): string | void =>{
-        const usersStorage = JSON.parse(localStorage.getItem('users_db') || '[]') as User[]
-        const hasUser = usersStorage.find((user)=> user.email === email)
+    const login = async (email:string, senhaAcesso:string): Promise <string | void> =>{
 
-        if(hasUser){
-            if(hasUser.senha === senha){
-                const token = Math.random().toString(36).substring(2)
-                localStorage.setItem('user_token', JSON.stringify({email, token}))
-                setUser(hasUser)
-                return
+        try{
+            const response = await fetch("http://localhost:8080/pacientes");
+            const users: User[] = await response.json();
+
+            const hasUser = users.find((user)=> user.email === email)
+
+            if(hasUser){
+                if(hasUser.senhaAcesso === senhaAcesso){
+                    setUser(hasUser)
+                    return
+                }else{
+                    return 'E-mail ou senha incorretos.'
+                }
             }else{
-                return 'E-mail ou senha incorretos.'
+                return 'Usuário não cadastrado.'
             }
-        }else{
-            return 'Usuário não cadastrado.'
+        }catch(error){
+            console.error(error);
+            return "Erro de comunicação com o servidor.";
         }
     }
 

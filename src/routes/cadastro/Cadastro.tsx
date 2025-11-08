@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 export default function Cadastro(){
-    const [nome, setNome] = useState ('')
+    const [nomePaciente, setNomePaciente] = useState ('')
     const [cpf, setCPF] = useState ('')
     const [dtNascimento, setDtNascimento] = useState ('')
     const [email, setEmail] = useState('')
     const [emailConfirm, setEmailConfirm] = useState('')
-    const [senha, setSenha] = useState('')
+    const [senhaAcesso, setSenhaAcesso] = useState('')
     const [telefone, setTelefone] = useState ('')
     const [error, setError] = useState('')
 
@@ -17,25 +17,25 @@ export default function Cadastro(){
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>)=>{
         const {name, value} = e.target
-        if(name === 'nome') setNome (value)
+        if(name === 'nomePaciente') setNomePaciente (value)
         if(name === 'cpf') setCPF (value)
         if(name === 'dtNascimento') setDtNascimento (value)
         if(name === 'email') setEmail(value)
         if(name === 'emailConfirm') setEmailConfirm(value)
-        if(name === 'senha') setSenha(value)
+        if(name === 'senhaAcesso') setSenhaAcesso(value)
         if(name === 'telefone') setTelefone (value)
     }
 
-    const handleCadastro = (e: React.FormEvent)=>{
+    const handleCadastro = async (e: React.FormEvent)=>{
         e.preventDefault()
-        if(!nome || !cpf || !dtNascimento || !email || !emailConfirm || !senha || !telefone){
+        if(!nomePaciente || !cpf || !dtNascimento || !email || !emailConfirm || !senhaAcesso || !telefone){
             setError('Todos os campos são obrigatórios.')
             return
         }else if(email !== emailConfirm){
             setError('Os e-mails não são iguais.')
             return
         }
-        const res = cadastro(nome,cpf,new Date (dtNascimento),email, senha, Number (telefone))
+        const res = await cadastro(nomePaciente,cpf,new Date (dtNascimento),email, senhaAcesso, Number (telefone))
         if(res){
             setError(res)
             return
@@ -57,7 +57,7 @@ export default function Cadastro(){
                     <h1 className="text-5xl text-center text-[#0077C8] font-bold m-6">Criar conta</h1>
                     
                     <input className="w-full p-2 mb-2 border-2 border-gray-400 rounded-md" type="text"
-                    placeholder="Digite seu nome completo:" name="nome" value={nome} onChange={handleChange}/>
+                    placeholder="Digite seu nome completo:" name="nomePaciente" value={nomePaciente} onChange={handleChange}/>
                     
                     <input className="w-full p-2 mb-2 border-2 border-gray-400 rounded-md" type="number"
                     placeholder="Digite seu CPF:" name="cpf" value={cpf} onChange={handleChange}/>
@@ -72,7 +72,7 @@ export default function Cadastro(){
                     placeholder="Confirme o seu e-mail:" name="emailConfirm" value={emailConfirm} onChange={handleChange}/>
                     
                     <input className="w-full p-2 mb-2 border-2 border-gray-400 rounded-md" type="password"
-                    placeholder="Digite sua senha:" name="senha" value={senha} onChange={handleChange}/>
+                    placeholder="Digite sua senha:" name="senhaAcesso" value={senhaAcesso} onChange={handleChange}/>
 
                     <input className="w-full p-2 mb-2 border-2 border-gray-400 rounded-md" type="tel"
                     placeholder="Digite seu telefone:" name="telefone" value={telefone} onChange={handleChange}/>
