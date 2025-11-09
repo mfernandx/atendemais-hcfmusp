@@ -33,6 +33,8 @@ export default function Login(){
             setSenha('')
             return
         }
+
+        alert('Login realizado com sucesso!');
         navigate('/home')
     }    
 

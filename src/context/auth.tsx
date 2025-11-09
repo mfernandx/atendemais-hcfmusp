@@ -22,14 +22,11 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
     const [user, setUser] = useState<User | null>(null)
 
     useEffect(()=>{
-        const userToken = localStorage.getItem('user_token')
-        const userStorage = localStorage.getItem('users_db')
 
-        if(userToken && userStorage){
-            const users: User[] = JSON.parse(userStorage)
-            const tokenData = JSON.parse(userToken)
-            const hasUser = users.find((u)=> u.email === tokenData.email)
-            if(hasUser) setUser(hasUser) 
+        const storedUser = localStorage.getItem("user_data");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        
         }
     },[])
 
@@ -69,32 +66,38 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
 
     }
 
-    const login = async (email:string, senhaAcesso:string): Promise <string | void> =>{
+    
 
-        try{
-            const response = await fetch(`http://localhost:8080/pacientes/login/${encodeURIComponent(email)}/${encodeURIComponent(senhaAcesso)}`);
+    const login = async (email: string, senhaAcesso: string): Promise<string | void> => {
 
-            if(response.ok){
-                const mensagem = await response.text();
-                alert(mensagem);
-                return;
-            }else if(response.status === 401 || response.status === 422){
-                const erroData = await response.json().catch(() => null);
-                return erroData?.erro || "E-mail ou senha incorretos.";
-            }else {
-                return "Erro ao efetuar login.";
-            }
-            
-            
-        }catch(error){
-            console.error(error);
-            return "Erro de comunicação com o servidor.";
+    try {
+
+        const response = await fetch(`http://localhost:8080/pacientes/login/${encodeURIComponent(email)}/${encodeURIComponent(senhaAcesso)}`);
+
+        if (response.ok) {
+            const userData = await response.json();
+            setUser(userData);
+            localStorage.setItem("user_data", JSON.stringify(userData));
+            return;
+
+        } else if (response.status === 401 || response.status === 422) {
+            const erroData = await response.json().catch(() => null);
+            return erroData?.erro || "E-mail ou senha incorretos.";
+
+        } else {
+            return "Erro ao efetuar login.";
         }
+        
+    } catch (error) {
+        console.error(error);
+        return "Erro de comunicação com o servidor.";
     }
+};
+
 
     const logout = ()=>{
         setUser(null)
-        localStorage.removeItem('user_token')
+        localStorage.removeItem('user_data')
     }
 
     return(
