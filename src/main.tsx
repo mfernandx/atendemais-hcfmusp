@@ -17,6 +17,7 @@ import { AuthProvider } from './context/auth.tsx'
 import Login from './routes/login/Login.tsx'
 import Cadastro from './routes/cadastro/Cadastro.tsx'
 import Usuario from './routes/usuario/Usuario.tsx'
+import Alteracao from './routes/alteracao/Alteracao.tsx'
 
 
 
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
       {
         path:"/usuario",
         element:<Usuario/>
+      },
+      {
+        path:"/teste",
+        element:<Alteracao/>
       }
     ]
   }

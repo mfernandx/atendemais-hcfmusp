@@ -1,5 +1,6 @@
 
 import {createContext, useEffect, useState} from "react"
+//import { useNavigate } from "react-router-dom";
 
 type User = { nomePaciente: string, cpf: string, dtNascimento: Date, email: string, senhaAcesso: string, telefone: number }
 
@@ -8,7 +9,7 @@ type AuthContextType = {
     signed: boolean,
     login: (email: string, senhaAcesso: string) => Promise <string | void>,
     cadastro: (nomePaciente: string, cpf: string, dtNascimento: Date, email: string, senhaAcesso: string, telefone: number) => Promise<string | void>; 
-    logout: ()=> void,
+    logout: (email:string, senhaAcesso: string)=> Promise <string | void>,
 }
 
 type AuthProviderProps = {
@@ -20,6 +21,7 @@ export const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 export const AuthProvider = ({children}:AuthProviderProps)=>{
 
     const [user, setUser] = useState<User | null>(null)
+    //const navigate = useNavigate();
 
     useEffect(()=>{
 
@@ -95,9 +97,31 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
 };
 
 
-    const logout = ()=>{
-        setUser(null)
-        localStorage.removeItem('user_data')
+    const logout = async (email:string, senhaAcesso:string): Promise <string | void> =>{
+        try {
+            const response = await fetch(
+      `http://localhost:8080/pacientes/excluir/${encodeURIComponent(email)}/${encodeURIComponent(senhaAcesso)}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if (response.ok) {
+        localStorage.removeItem('user_data');
+        setUser(null);
+        return "Conta excluída com sucesso.";
+        
+    }else if (response.status === 422 || response.status === 401) {
+        const text = await response.text();
+        return text || "E-mail ou senha incorretos.";
+
+    } else {
+        return "Erro ao excluir conta.";
+    }
+        } catch (error) {
+            console.error(error);
+            return "Erro de comunicação com o servidor.";
+        }
     }
 
     return(

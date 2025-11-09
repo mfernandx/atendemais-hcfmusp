@@ -65,7 +65,7 @@ export default function Contato(){
                 </section>
 
             
-                <button type="submit" className="w-full bg-indigo-600 text-white py-2 px-4 rounded-3xl hover:bg-indigo-700 transition">ENVIAR</button>
+                <button type="submit" className="w-full bg-indigo-600 text-white py-2 px-4 rounded-3xl hover:bg-indigo-700 transition font-bold">ENVIAR</button>
 
             </form>
     

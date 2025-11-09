@@ -1,16 +1,42 @@
 import Navegador from "../../components/Navegador";
 import Rodape from "../../components/Rodape";
 import personagemchatbot from '/personagemchatbot.png'
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/auth.tsx";
+import { useNavigate } from "react-router-dom";
 
 export default function Usuario(){
 
-    const { user } = useContext(AuthContext);
+    const { user,logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [mensagem, setMensagem] = useState<string | null>(null);
 
     if (!user) {
         return <p>Você precisa estar logado para ver suas informações.</p>;
     }
+
+    const handleExcluir = async () => {
+        
+        const senha = prompt("Digite sua senha para confirmar a exclusão da conta:");
+
+        if (!senha) {
+        setMensagem("Operação cancelada. Nenhuma senha informada.");
+        return;
+        }
+
+        const resposta = await logout(user.email, senha);
+
+        if (resposta === "Conta excluída com sucesso.") {
+        alert(resposta);
+        setTimeout(() => {navigate("/login");}, 100);
+    
+    
+
+        } else {
+        setMensagem(resposta || "Erro ao excluir conta.");
+      
+    }
+  };
 
     return(
         <>
@@ -39,14 +65,26 @@ export default function Usuario(){
 
         </section>
 
-        <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4">Minhas Informações</h1>
-            <p><strong>Nome:</strong> {user.nomePaciente}</p>
-            <p><strong>CPF:</strong> {user.cpf}</p>
-            <p><strong>Data de Nascimento:</strong> {new Date(user.dtNascimento).toLocaleDateString()}</p>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Telefone:</strong> {user.telefone}</p>
-        </div>
+        <section className="p-6 bg-[#e9eded]">
+            <h1 className="text-5xl font-bold mb-4 ml-10">Minhas Informações</h1>
+            <p className="ml-10 mt-2 text-2xl font-light"><strong>Nome:</strong> {user.nomePaciente}</p>
+            <p className="ml-10 mt-2 text-2xl font-light"><strong>CPF:</strong> {user.cpf}</p>
+            <p className="ml-10 mt-2 text-2xl font-light"><strong>Data de Nascimento:</strong> {new Date(user.dtNascimento).toLocaleDateString()}</p>
+            <p className="ml-10 mt-2 text-2xl font-light"><strong>Email:</strong> {user.email}</p>
+            <p className="ml-10 mt-2 text-2xl font-light"><strong>Telefone:</strong> {user.telefone}</p>
+
+            <section className="flex mt-6">
+                <a href="/teste"className="block m-auto bg-[#0077C8] hover:bg-indigo-600 py-2 px-14 rounded-full text-white font-bold"
+                        type="submit">ALTERAR DADOS</a>
+                
+                <button onClick={handleExcluir} className="block m-auto bg-red-400 hover:bg-red-500 py-2 px-14 rounded-full text-white font-bold"
+                        type="submit">EXCLUIR CONTA</button>
+            </section>
+
+            <p className="block m-3  text-center">{mensagem}</p>
+        </section>
+
+
 
         <Rodape/>
         </>
