@@ -65,7 +65,7 @@ export default function Usuario(){
 
         </section>
 
-        <section className="p-6 bg-[#e9eded]">
+        <section className="p-6 bg-[#e9eded] mb-10">
             <h1 className="text-5xl font-bold mb-4 ml-10">Minhas Informações</h1>
             <p className="ml-10 mt-2 text-2xl font-light"><strong>Nome:</strong> {user.nomePaciente}</p>
             <p className="ml-10 mt-2 text-2xl font-light"><strong>CPF:</strong> {user.cpf}</p>
@@ -74,10 +74,10 @@ export default function Usuario(){
             <p className="ml-10 mt-2 text-2xl font-light"><strong>Telefone:</strong> {user.telefone}</p>
 
             <section className="flex mt-6">
-                <a href="/teste"className="block m-auto bg-[#0077C8] hover:bg-indigo-600 py-2 px-14 rounded-full text-white font-bold"
+                <a href="/teste"className="block ml-10 bg-[#0077C8] hover:bg-indigo-600 py-2 px-14 rounded-full text-white font-bold"
                         type="submit">ALTERAR DADOS</a>
                 
-                <button onClick={handleExcluir} className="block m-auto bg-red-400 hover:bg-red-500 py-2 px-14 rounded-full text-white font-bold"
+                <button onClick={handleExcluir} className="ml-5 block  bg-red-400 hover:bg-red-500 py-2 px-14 rounded-full text-white font-bold"
                         type="submit">EXCLUIR CONTA</button>
             </section>
 

@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+# INTEGRANTES
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Beatriz de Sousa Franco - RM: 563686 - 1TDSPI 
 
-Currently, two official plugins are available:
+Giovana Souza Vieira - RM: 564430 - 1TDSPI
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Maria Fernanda Santos Mendes - RM: 565277 - 1TDSPI
 
-## React Compiler
+## SOBRE O PROJETO
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+O projeto ATENDE+HC consiste em uma solução para a problemática do aumento das taxas de absenteísmo no Hospital das Clínicas, temos como objetivo complementar a plataforma digital do Hospital das Clínicas, visando diminuir significativamente a taxa de absenteísmo através de um projeto intuitivo e acessível.
 
-## Expanding the ESLint configuration
+Nosso projeto consiste em:
+- Criação de um ChatBot de uma assistência digital e integrá-lo à plataformas cujo os usuários já possuem familiaridade, que são o Whatsapp e o Telegram.
+- Criação de um site de apoio, para fornecer explicações e demonstrações claras e intuitivas dessa nova funcionalidade, além de auxiliar o usuário com suas informações pessoais.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## FERRAMENTAS UTILIZADAS
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React+Vite+TypeScript
+- Tailwind CSS
+- CSS
+- HookForms
+- React Router
+- API QUARKUS/JAVA/MAVEN
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ESTRUTURA DE PASTAS
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+components/Navegador.tsx = Componente fixo que exibe o navegador da página.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+components/Rodape.tsx = Componente fixo que exibe o rodapé da página
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+routes/login/Login.tsx = Página de Login que valida a entrada do usuário em conexão com as contas cadastradas no banco de dados.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+routes/cadastro/Cadastro.tsx = Página de cadastro que insere as informações do usuário no banco de dados.
+
+routes/home/Home.tsx = Página inicial que contém a apresentação da solução proposta e suas características, como objetivo e resultados. 
+
+routes/funcionalidades/Funcionalidades.tsx = Página que detalha as funcionalidades principais do aplicativo. 
+
+routes/prototipo/Prototipo.tsx = Página que exibe o Protótipo do ChatBot em funcionamento.
+
+routes/faq/Faq.tsx = Página de perguntas frequentes sobre o aplicativo. 
+
+routes/criadores/Sobre.tsx = Página sobre o grupo criador do projeto. 
+
+routes/contato/Contato.tsx = Página que contém o formulário de contato.
+
+routes/usuario/Usuario.tsx = Página onde o usuário pode ver, alterar e/ou excluir suas informações pessoais.
+
+routes/alteracao/Alteracao.tsx = Página onde o usuário pode alterar suas informações de contato e seu login.
+
+routes/error/Erro.tsx = Página que será aberta em caso de erro/inexistência de página.
+
+#LINK DO REPOSITÓRIO
+
+
+#LINK DO VÍDEO DO YOUTUBE

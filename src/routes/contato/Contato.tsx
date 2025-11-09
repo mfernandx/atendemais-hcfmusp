@@ -1,17 +1,48 @@
+import { useState } from 'react';
 import Navegador from '../../components/Navegador';
 import Rodape from '../../components/Rodape';
 import personagemchatbot from '/personagemchatbot.png'
 import {useForm} from "react-hook-form";
 
-type Formulario = {nome:string;email:string;observacao:string};
+type Formulario = {nomeAvaliador:string;emailAvaliador:string;observacao:string};
 
 export default function Contato(){
 
     const {register,handleSubmit} = useForm <Formulario>();
+    const [mensagem, setMensagem] = useState<string | null>(null);
+    const [tipoMensagem, setTipoMensagem] = useState<"sucesso" | "erro" | null>(null);
 
-    const onSubmit = (dados:Formulario) => {
+    const onSubmit = async (dados:Formulario) => {
         console.log("Dados do form:",dados);
-    }
+
+        try {
+            const response = await fetch("http://localhost:8080/avaliacoes", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    nomeUsuario: dados.nomeAvaliador,
+                    emailUsuario: dados.emailAvaliador,
+                    mensagem: dados.observacao
+                 }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setMensagem(data.mensagem || "Mensagem registrada com sucesso!");
+                setTipoMensagem("sucesso");
+                
+            } else {
+                setMensagem(data.erro || "Erro ao enviar avaliação.");
+                setTipoMensagem("erro");
+            }
+
+        } catch (error) {
+            console.error(error);
+            setMensagem("Erro ao comunicar com o servidor.");
+            setTipoMensagem("erro");
+        }
+    };
     
     return(
         <>
@@ -52,12 +83,12 @@ export default function Contato(){
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 justify-self-center ">
             
                 <section className=''>
-                <input className="mt-5 w-[600px] px-4 py-2 border rounded-3xl focus:ring-2 focus:ring-indigo-500 outline-none border-gray-300 bg-white " id="nome" type="text"{...register("nome", { required: true })}placeholder="Informe seu nome completo:"/>
+                <input className="mt-5 w-[600px] px-4 py-2 border rounded-3xl focus:ring-2 focus:ring-indigo-500 outline-none border-gray-300 bg-white " id="nome" type="text"{...register("nomeAvaliador", { required: true })}placeholder="Informe seu nome completo:"/>
                 </section>
 
             
                 <section className=''>
-                <input className="w-[600px] px-4 py-2 border rounded-3xl focus:ring-2 focus:ring-indigo-500 outline-none border-gray-300 bg-white" id="email"type="email"{...register("email", { required: true })}placeholder="Informe seu e-mail:" />
+                <input className="w-[600px] px-4 py-2 border rounded-3xl focus:ring-2 focus:ring-indigo-500 outline-none border-gray-300 bg-white" id="email"type="email"{...register("emailAvaliador", { required: true })}placeholder="Informe seu e-mail:" />
                 </section>
 
                 <section className=''>
@@ -68,6 +99,8 @@ export default function Contato(){
                 <button type="submit" className="w-full bg-indigo-600 text-white py-2 px-4 rounded-3xl hover:bg-indigo-700 transition font-bold">ENVIAR</button>
 
             </form>
+
+            <p className={`mt-4 text-center font-medium ${tipoMensagem === "sucesso" ? "text-green-600" : "text-red-500"}`}>{mensagem}</p>
     
         </section>
 
