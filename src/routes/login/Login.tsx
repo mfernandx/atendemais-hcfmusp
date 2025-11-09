@@ -20,13 +20,13 @@ export default function Login(){
         if(name === 'senha') setSenha(value)
     }
 
-    const handleLogin = (e: React.FormEvent)=>{
+    const handleLogin = async (e: React.FormEvent)=>{
         e.preventDefault()
         if(!email || !senha){
             setError('Preencha todos os campos.')
             return
         }
-        const res = login(email, senha)
+        const res = await login(email, senha)
         if(res){
             setError(res)
             setEmail('')

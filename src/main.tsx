@@ -16,6 +16,7 @@ import useAuth from './hooks/useAuth.ts'
 import { AuthProvider } from './context/auth.tsx'
 import Login from './routes/login/Login.tsx'
 import Cadastro from './routes/cadastro/Cadastro.tsx'
+import Usuario from './routes/usuario/Usuario.tsx'
 
 type PrivateProps = {
   Item: React.ComponentType
@@ -40,10 +41,14 @@ const router = createBrowserRouter([
       
       {
         path:"/home",
-        element: <Home/>
+        element: <Private Item={Home}/>
       },
-      {path: '/login', element: <Login/>},
-      {path: '/cadastro', element: <Cadastro/>},
+      {
+        path: '/login', 
+        element: <Login/>},
+      {
+        path: '/cadastro', 
+        element: <Cadastro/>},
       
       {
         path:"/funcionalidades",
@@ -64,6 +69,10 @@ const router = createBrowserRouter([
       {
         path:"/contato",
         element:<Contato/>
+      },
+      {
+        path:"/usuario",
+        element:<Usuario/>
       }
     ]
   }

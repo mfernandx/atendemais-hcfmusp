@@ -10,7 +10,7 @@ export default function Prototipo(){
 
         <Navegador/>
         
-        <header className="h-35 bg-linear-to-r from-[#049fce] via-[#39b7dd] to-[#95e4f8] flex justify-center text-7xl p-6">
+        <header className="h-35 bg-[url('/hcfmusp-aerea.jpg')] bg-cover bg-center flex justify-center text-7xl text-white p-6">
             <h1 className="font-bold"> PROTÓTIPO </h1>
         </header>
 

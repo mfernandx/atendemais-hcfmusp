@@ -1,3 +1,4 @@
+
 import {createContext, useEffect, useState} from "react"
 
 type User = { nomePaciente: string, cpf: string, dtNascimento: Date, email: string, senhaAcesso: string, telefone: number }
@@ -22,7 +23,7 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
 
     useEffect(()=>{
         const userToken = localStorage.getItem('user_token')
-        const userStorage = localStorage.getItem('users_db') //pode ser substituido por uma API
+        const userStorage = localStorage.getItem('users_db')
 
         if(userToken && userStorage){
             const users: User[] = JSON.parse(userStorage)
@@ -71,21 +72,20 @@ export const AuthProvider = ({children}:AuthProviderProps)=>{
     const login = async (email:string, senhaAcesso:string): Promise <string | void> =>{
 
         try{
-            const response = await fetch("http://localhost:8080/pacientes");
-            const users: User[] = await response.json();
+            const response = await fetch(`http://localhost:8080/pacientes/login/${encodeURIComponent(email)}/${encodeURIComponent(senhaAcesso)}`);
 
-            const hasUser = users.find((user)=> user.email === email)
-
-            if(hasUser){
-                if(hasUser.senhaAcesso === senhaAcesso){
-                    setUser(hasUser)
-                    return
-                }else{
-                    return 'E-mail ou senha incorretos.'
-                }
-            }else{
-                return 'Usuário não cadastrado.'
+            if(response.ok){
+                const mensagem = await response.text();
+                alert(mensagem);
+                return;
+            }else if(response.status === 401 || response.status === 422){
+                const erroData = await response.json().catch(() => null);
+                return erroData?.erro || "E-mail ou senha incorretos.";
+            }else {
+                return "Erro ao efetuar login.";
             }
+            
+            
         }catch(error){
             console.error(error);
             return "Erro de comunicação com o servidor.";

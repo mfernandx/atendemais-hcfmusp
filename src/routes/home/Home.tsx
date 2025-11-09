@@ -35,7 +35,7 @@ export default function Home(){
 
         </section>
 
-        <section className='h-5 bg-[#14666f] mb-5'></section>
+        <section className='h-5 bg-[#0077C8] mb-5'></section>
 
         <section className='flex mb-5'>
 
@@ -60,7 +60,7 @@ export default function Home(){
 
         </section>
 
-        <section className='h-5 bg-[#14666f]'></section>
+        <section className='h-5 bg-[#0077C8]'></section>
 
         <section className='flex mb-5'>
 
